@@ -1,10 +1,17 @@
 import React from 'react'
-import printMe from './print.js'
-import './index.css'
+import ReactDOM from 'react-dom'
 
-var btn = document.createElement('button')
-btn.innerHTML = 'Click me and check the console!'
-btn.onclick = printMe
-document.body.appendChild(btn)
+class HelloMessage extends React.Component {
+  render() {
+    return (
+      <div>
+        Hello {this.props.name}
+      </div>
+    );
+  }
+}
 
-console.log(React)
+ReactDOM.render(
+  <HelloMessage name="Arturo" />,
+  document.getElementById('app')
+);
