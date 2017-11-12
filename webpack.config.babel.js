@@ -17,7 +17,8 @@ module.exports = env => {
       new CleanWebpackPlugin(['dist']),
       new ManifestPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Glamorous Example'
+        title: 'Glamorous Example',
+        template: './src/index.html'
       })
     ],
     output: {
