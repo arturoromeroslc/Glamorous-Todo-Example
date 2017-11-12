@@ -2,6 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {createStore} from 'Redux'
 import glamorous from 'glamorous'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
 const mediaQueries = {
 	phone: '@media only screen and (max-width: 500px)',
@@ -59,22 +64,43 @@ const Counter = ({
 
 const render = () => {
   ReactDOM.render(
-    <Counter
-      value={store.getState()}
-      onIncrement={() => {
-        store.dispatch({
-          type: 'INCREMENT'
-        })
-      }}
-      onDecrement={() => {
-        store.dispatch({
-          type: 'DECREMENT'
-        })
-      }}
-    />,
+	  <Router>
+	    <div>
+	      <ul>
+	        <li><Link to="/">Home</Link></li>
+	        <li><Link to="/counter">Counter</Link></li>
+	      </ul>
+	      <hr/>
+				<Route exact path="/" component={Home}/>
+	      <Route
+					exact path="/counter"
+					render={()=>
+						<Counter
+							value={store.getState()}
+							onIncrement={() => {
+								store.dispatch({
+									type: 'INCREMENT'
+								})
+							}}
+							onDecrement={() => {
+								store.dispatch({
+									type: 'DECREMENT'
+								})
+							}}
+						/>
+					}>
+				</Route>
+	    </div>
+	  </Router>,
     document.getElementById('app')
   )
 }
+
+const Home = () => (
+  <div>
+    <h2>Welcome to my React examples</h2>
+  </div>
+)
 
 store.subscribe(render);
 render();
