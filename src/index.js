@@ -54,7 +54,7 @@ const Counter = ({
     <CurrentCount>{value}</CurrentCount>
     <Button onClick={onIncrement}>+</Button>
     <Button onClick={onDecrement}>-</Button>
-</Container>
+	</Container>
 )
 
 const render = () => {
