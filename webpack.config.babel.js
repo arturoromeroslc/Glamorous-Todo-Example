@@ -7,7 +7,6 @@ module.exports = env => {
   return {
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
     },
     devtool: 'inline-source-map',
     devServer: {
