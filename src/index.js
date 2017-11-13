@@ -2,11 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {createStore} from 'Redux'
 import glamorous from 'glamorous'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
+import {BrowserRouter, Route, Link} from 'react-router-dom'
 
 const mediaQueries = {
 	phone: '@media only screen and (max-width: 500px)',
@@ -64,14 +60,16 @@ const Counter = ({
 
 const render = () => {
   ReactDOM.render(
-	  <Router>
+	  <BrowserRouter>
 	    <div>
 	      <ul>
 	        <li><Link to="/">Home</Link></li>
 	        <li><Link to="/counter">Counter</Link></li>
+	        <li><Link to="/todos">Todos</Link></li>
 	      </ul>
 	      <hr/>
 				<Route exact path="/" component={Home}/>
+				<Route exact path="/todos" component={Todos}/>
 	      <Route
 					exact path="/counter"
 					render={()=>
@@ -91,7 +89,7 @@ const render = () => {
 					}>
 				</Route>
 	    </div>
-	  </Router>,
+	  </BrowserRouter>,
     document.getElementById('app')
   )
 }
@@ -100,6 +98,12 @@ const Home = () => (
   <div>
     <h2>Welcome to my React examples</h2>
   </div>
+)
+
+const Todos = () => (
+	<div>
+		<h2>Todos</h2>
+	</div>
 )
 
 store.subscribe(render);
