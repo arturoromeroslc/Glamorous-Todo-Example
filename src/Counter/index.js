@@ -29,7 +29,7 @@ const Button = glamorous.button({
   fontSize: '1.2em'
 })
 
-export const Counter = ({
+export default ({
   value,
   onIncrement,
   onDecrement

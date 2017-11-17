@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter, Route, Link} from 'react-router-dom'
-import {Counter} from './Counter'
+import Counter from './Counter'
 import store from './Counter/CounterReducer';
 
 const render = () => {
