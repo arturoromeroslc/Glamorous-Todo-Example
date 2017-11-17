@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {BrowserRouter, Route, Link} from 'react-router-dom'
 import Counter from './Counter'
 import store from './Counter/CounterReducer';
+import Todo from './Todo'
 
 const render = () => {
   ReactDOM.render(
@@ -15,7 +16,7 @@ const render = () => {
 	      </ul>
 	      <hr/>
 				<Route exact path="/" component={Home}/>
-				<Route exact path="/todos" component={Todos}/>
+				<Route exact path="/todos" component={Todo}/>
 	      <Route
 					exact path="/counter"
 					render={()=>
@@ -44,12 +45,6 @@ const Home = () => (
   <div>
     <h2>Welcome to my React examples</h2>
   </div>
-)
-
-const Todos = () => (
-	<div>
-		<h2>Todos</h2>
-	</div>
 )
 
 store.subscribe(render);

@@ -1,11 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {createStore} from 'Redux'
+import store from './TodoReducer'
 
-const toggleTodos = (todo) => {
-  return {
-    id: todo.id,
-    text: todo.text,
-    completed: !todo.completed
-  }
-}
+export default () => (
+	<div>
+		<h2>Todos</h2>
+	</div>
+)
