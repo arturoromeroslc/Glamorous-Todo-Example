@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "webpack --progress --watch",
     "build": "webpack",
-    "start": "webpack-dev-server --open"
+    "start:dev": "webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,8 @@
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "shortid": "^2.2.8"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
