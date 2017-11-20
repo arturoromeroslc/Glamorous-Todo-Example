@@ -23,6 +23,7 @@ const todo = (state, action) => {
 }
 
 const todos = (state = [], action) => {
+  console.log(state, action);
   switch (action.type) {
     case 'ADD_TODO':
       return [
@@ -51,28 +52,5 @@ const todoApp = combineReducers({
 })
 
 const store = createStore(todoApp)
-
-console.log('initial State');
-console.log(store.getState());
-console.log('---------------');
-
-console.log('dispatch  ADD_TODO');
-store.dispatch({
-  type: 'ADD_TODO',
-  id: 0,
-  text: 'Learn More Redux'
-})
-console.log('current state');
-console.log(store.getState());
-console.log('---------------');
-
-console.log('dispatch  TOGGLE_TODO');
-store.dispatch({
-  type: 'TOGGLE_TODO',
-  id: 0,
-})
-console.log('current state');
-console.log(store.getState());
-console.log('---------------');
 
 export default store

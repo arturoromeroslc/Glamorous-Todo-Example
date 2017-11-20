@@ -2,8 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter, Route, Link} from 'react-router-dom'
 import Counter from './Counter'
-import store from './Counter/CounterReducer';
+import couterStore from './Counter/CounterReducer';
+import todoStore from './Todo/TodoReducer'
 import Todo from './Todo'
+
+console.log('todoStore.getState()', todoStore.getState());
 
 const render = () => {
   ReactDOM.render(
@@ -16,19 +19,40 @@ const render = () => {
 	      </ul>
 	      <hr/>
 				<Route exact path="/" component={Home}/>
-				<Route exact path="/todos" component={Todo}/>
+				<Route
+          exact path="/todos"
+          render={() =>
+            <Todo
+              todos={todoStore.getState().todos}
+              addTodo={({text, id}) => {
+                console.log('hi', text);
+                todoStore.dispatch({
+                  type: 'ADD_TODO',
+                  id: id,
+                  text: text
+                })
+              }}
+              toggleTodo={(id) => {
+                todoStore.dispatch({
+                  type: 'TOGGLE_TODO',
+                  id: id
+                })
+              }}
+            />
+          }>
+        </Route>
 	      <Route
 					exact path="/counter"
 					render={()=>
 						<Counter
-							value={store.getState()}
+							value={couterStore.getState()}
 							onIncrement={() => {
-								store.dispatch({
+								couterStore.dispatch({
 									type: 'INCREMENT'
 								})
 							}}
 							onDecrement={() => {
-								store.dispatch({
+								couterStore.dispatch({
 									type: 'DECREMENT'
 								})
 							}}
@@ -47,5 +71,6 @@ const Home = () => (
   </div>
 )
 
-store.subscribe(render);
+couterStore.subscribe(render);
+todoStore.subscribe(render);
 render();
