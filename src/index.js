@@ -6,8 +6,6 @@ import couterStore from './Counter/CounterReducer';
 import todoStore from './Todo/TodoReducer'
 import TodoApp from './Todo'
 
-console.log('todoStore.getState()', todoStore.getState());
-
 const render = () => {
   ReactDOM.render(
 	  <BrowserRouter>
@@ -26,7 +24,6 @@ const render = () => {
               todos={todoStore.getState().todos}
               visibilityFilter={todoStore.getState().visibilityFilter}
               addTodo={({text, id}) => {
-                console.log('hi', text);
                 todoStore.dispatch({
                   type: 'ADD_TODO',
                   id: id,

@@ -36,10 +36,7 @@ const Todo = ({
 }) => (
 	<li>
 		<Span strike={completed}>{text}</Span>
-		<button onClick={(e) => {
-			console.log('e inside', e, id);
-			return onToggle(e, id)}
-		}>
+		<button onClick={(e) => onToggle(e, id)}>
 			Toggle
 		</button>
 	</li>
@@ -102,7 +99,6 @@ export default class TodoApp extends Component {
 	}
 
 	toggleTodo(e, id) {
-		debugger;
 		e.preventDefault()
 		e.stopPropagation()
 		this.props.toggleTodo(id)
