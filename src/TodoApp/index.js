@@ -5,30 +5,7 @@ import store from './TodoReducer'
 import AddTodo from './AddTodo'
 import TodoList from './TodoList'
 import Todo from './Todo'
-
-const FilterLink = ({
-	filter,
-	currentFilter,
-	children
-}) => {
-	if (filter === currentFilter) {
-		return <span>{children}</span>
-	}
-	return (
-		<a
-			href="#"
-			onClick={e => {
-				e.preventDefault()
-				store.dispatch({
-					type: 'SET_VISIBILITY_FILTER',
-					filter
-				})
-			}}
-		>
-			{children}
-		</a>
-	)
-}
+import Footer from './Footer'
 
 const getVisibleTodos = (
 	todos,
@@ -85,46 +62,24 @@ export default class TodoApp extends Component {
 		return (
 			<span>
 				<h1>Todos</h1>
-
 				<AddTodo
 					handleSubmit={this.handleSubmit}
 					value={this.state.value}
 					handleChange={this.handleChange}
 				/>
-
-				{/* <form onSubmit={handleSubmit}>
-					<label>
-						Todo:
-						<input type="text" value={value} onChange={handleChange}></input>
-					</label>
-					<input type="submit" value="Submit" />
-				</form> */}
-
 				<TodoList
 					todos={visibleTodos}
 					onToggle={this.toggleTodo}
 				/>
-				<p>
-					Show:
-					<FilterLink
-						filter="SHOW_ALL"
-						currentFilter={visibilityFilter}
-					>
-						ALL
-					</FilterLink>
-					<FilterLink
-						filter="SHOW_ACTIVE"
-						currentFilter={visibilityFilter}
-					>
-						ACTIVE
-					</FilterLink>
-					<FilterLink
-						filter="SHOW_COMPLETED"
-						currentFilter={visibilityFilter}
-					>
-						COMPLETED
-					</FilterLink>
-				</p>
+				<Footer
+					visibilityFilter={visibilityFilter}
+					onFilterClick={filter =>
+						store.dispatch({
+							type: 'SET_VISIBILITY_FILTER',
+							filter
+						})
+					}
+				/>
 			</span>
 		)
 	}
