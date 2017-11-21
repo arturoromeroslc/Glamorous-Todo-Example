@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 import {BrowserRouter, Route, Link} from 'react-router-dom'
 import Counter from './Counter'
 import couterStore from './Counter/CounterReducer';
-import todoStore from './Todo/TodoReducer'
-import TodoApp from './Todo'
+import todoStore from './TodoApp/TodoReducer'
+import TodoApp from './TodoApp'
 
 const render = () => {
   ReactDOM.render(

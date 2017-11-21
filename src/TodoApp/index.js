@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import shortid from 'shortid'
-import glamorous from 'glamorous'
 import store from './TodoReducer'
+import AddTodo from './AddTodo'
+import TodoList from './TodoList'
+import Todo from './Todo'
 
 const FilterLink = ({
 	filter,
@@ -28,37 +30,6 @@ const FilterLink = ({
 	)
 }
 
-const Todo = ({
-	id,
-	onToggle,
-	completed,
-	text
-}) => (
-	<li>
-		<Span strike={completed}>{text}</Span>
-		<button onClick={(e) => onToggle(e, id)}>
-			Toggle
-		</button>
-	</li>
-)
-
-const TodoList = ({
-	todos,
-	onToggle
-}) => (
-	<ul>
-		{todos.map((todo) =>
-			<Todo
-				key={todo.id}
-				id={todo.id}
-				completed={todo.completed}
-				text={todo.text}
-				onToggle={onToggle}
-			/>
-		)}
-	</ul>
-)
-
 const getVisibleTodos = (
 	todos,
 	filter
@@ -76,9 +47,6 @@ const getVisibleTodos = (
 			)
 	}
 }
-
-const Span = glamorous
-	.span(({strike}) => ({textDecoration: strike ? 'line-through' : ''}))
 
 export default class TodoApp extends Component {
 	constructor(props) {
@@ -118,13 +86,19 @@ export default class TodoApp extends Component {
 			<span>
 				<h1>Todos</h1>
 
-				<form onSubmit={this.handleSubmit}>
+				<AddTodo
+					handleSubmit={this.handleSubmit}
+					value={this.state.value}
+					handleChange={this.handleChange}
+				/>
+
+				{/* <form onSubmit={handleSubmit}>
 					<label>
 						Todo:
-						<input type="text" value={this.state.value} onChange={this.handleChange}></input>
+						<input type="text" value={value} onChange={handleChange}></input>
 					</label>
 					<input type="submit" value="Submit" />
-				</form>
+				</form> */}
 
 				<TodoList
 					todos={visibleTodos}
