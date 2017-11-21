@@ -24,6 +24,7 @@ const render = () => {
           render={() =>
             <Todo
               todos={todoStore.getState().todos}
+              visibilityFilter={todoStore.getState().visibilityFilter}
               addTodo={({text, id}) => {
                 console.log('hi', text);
                 todoStore.dispatch({
