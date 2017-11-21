@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Link} from 'react-router-dom'
 import Counter from './Counter'
 import couterStore from './Counter/CounterReducer';
 import todoStore from './Todo/TodoReducer'
-import Todo from './Todo'
+import TodoApp from './Todo'
 
 console.log('todoStore.getState()', todoStore.getState());
 
@@ -22,7 +22,7 @@ const render = () => {
 				<Route
           exact path="/todos"
           render={() =>
-            <Todo
+            <TodoApp
               todos={todoStore.getState().todos}
               visibilityFilter={todoStore.getState().visibilityFilter}
               addTodo={({text, id}) => {

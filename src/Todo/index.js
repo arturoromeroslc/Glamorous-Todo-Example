@@ -4,24 +4,6 @@ import shortid from 'shortid'
 import glamorous from 'glamorous'
 import store from './TodoReducer'
 
-const getVisibleTodos = (
-	todos,
-	filter
-) => {
-	switch (filter) {
-		case 'SHOW_ALL':
-			return todos
-		case 'SHOW_COMPLETED':
-			return todos.filter(
-				t => t.completed
-			)
-		case 'SHOW_ACTIVE':
-			return todos.filter(
-				t => !t.completed
-			)
-	}
-}
-
 const FilterLink = ({
 	filter,
 	currentFilter,
@@ -46,10 +28,62 @@ const FilterLink = ({
 	)
 }
 
+const Todo = ({
+	id,
+	onToggle,
+	completed,
+	text
+}) => (
+	<li>
+		<Span strike={completed}>{text}</Span>
+		<button onClick={(e) => {
+			console.log('e inside', e, id);
+			return onToggle(e, id)}
+		}>
+			Toggle
+		</button>
+	</li>
+)
+
+const TodoList = ({
+	todos,
+	onToggle
+}) => (
+	<ul>
+		{todos.map((todo) =>
+			<Todo
+				key={todo.id}
+				id={todo.id}
+				completed={todo.completed}
+				text={todo.text}
+				onToggle={onToggle}
+			/>
+		)}
+	</ul>
+)
+
+const getVisibleTodos = (
+	todos,
+	filter
+) => {
+	switch (filter) {
+		case 'SHOW_ALL':
+			return todos
+		case 'SHOW_COMPLETED':
+			return todos.filter(
+				t => t.completed
+			)
+		case 'SHOW_ACTIVE':
+			return todos.filter(
+				t => !t.completed
+			)
+	}
+}
+
 const Span = glamorous
 	.span(({strike}) => ({textDecoration: strike ? 'line-through' : ''}))
 
-export default class Todo extends Component {
+export default class TodoApp extends Component {
 	constructor(props) {
 		super(props)
 		this.state = { value: '' }
@@ -68,6 +102,7 @@ export default class Todo extends Component {
 	}
 
 	toggleTodo(e, id) {
+		debugger;
 		e.preventDefault()
 		e.stopPropagation()
 		this.props.toggleTodo(id)
@@ -95,33 +130,24 @@ export default class Todo extends Component {
 					<input type="submit" value="Submit" />
 				</form>
 
-				<ul>
-					{visibleTodos.map((todo) => {
-						return (
-							<li key={todo.id}>
-								<Span strike={todo.completed}>{todo.text}</Span>
-								<button onClick={(e) => {this.toggleTodo(e, todo.id)}}>Toggle</button>
-							</li>
-						)
-					})}
-				</ul>
+				<TodoList
+					todos={visibleTodos}
+					onToggle={this.toggleTodo}
+				/>
 				<p>
 					Show:
-					{' '}
 					<FilterLink
 						filter="SHOW_ALL"
 						currentFilter={visibilityFilter}
 					>
 						ALL
 					</FilterLink>
-					{' '}
 					<FilterLink
 						filter="SHOW_ACTIVE"
 						currentFilter={visibilityFilter}
 					>
 						ACTIVE
 					</FilterLink>
-					{' '}
 					<FilterLink
 						filter="SHOW_COMPLETED"
 						currentFilter={visibilityFilter}
