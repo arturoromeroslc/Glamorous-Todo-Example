@@ -69,6 +69,8 @@ const Home = () => (
   </div>
 )
 
+//Technically, a container component is just a React component that uses store.subscribe() to read the part of state it
+//needs to pass it down to presentation components it renders.
 couterStore.subscribe(render);
 todoStore.subscribe(render);
 render();

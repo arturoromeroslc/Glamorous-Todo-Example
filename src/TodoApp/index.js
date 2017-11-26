@@ -59,6 +59,7 @@ export default class TodoApp extends Component {
 			todos,
 			visibilityFilter
 		)
+		
 		return (
 			<span>
 				<h1>Todos</h1>
