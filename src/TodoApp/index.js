@@ -59,19 +59,18 @@ export default class TodoApp extends Component {
 			todos,
 			visibilityFilter
 		)
-		
-		return (
-			<span>
-				<h1>Todos</h1>
+
+		return ([
+				<h2>Todos</h2>,
 				<AddTodo
 					handleSubmit={this.handleSubmit}
 					value={this.state.value}
 					handleChange={this.handleChange}
-				/>
+				/>,
 				<TodoList
 					todos={visibleTodos}
 					onToggle={this.toggleTodo}
-				/>
+				/>,
 				<Footer
 					visibilityFilter={visibilityFilter}
 					onFilterClick={filter =>
@@ -81,7 +80,7 @@ export default class TodoApp extends Component {
 						})
 					}
 				/>
-			</span>
+			]
 		)
 	}
 }

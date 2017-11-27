@@ -63,11 +63,7 @@ const render = () => {
   )
 }
 
-const Home = () => (
-  <div>
-    <h2>Welcome to my React examples</h2>
-  </div>
-)
+const Home = () => <h2>Welcome to my React examples</h2>
 
 //Technically, a container component is just a React component that uses store.subscribe() to read the part of state it
 //needs to pass it down to presentation components it renders.
